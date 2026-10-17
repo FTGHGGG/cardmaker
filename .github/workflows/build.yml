@@ -9,7 +9,7 @@ jobs:
         with: {distribution: temurin, java-version: '17'}
       - uses: gradle/actions/setup-gradle@v4
         with: {gradle-version: '8.7'}
-      - run: cat apk-src.zip.00* > src.zip && unzip -o src.zip
+      - run: cat apk-src.zip.00* > src.zip && unzip -o src.zip && (unzip -o icon.zip || true)
       - run: yes | ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager --licenses >/dev/null 2>&1 || true
       - run: ${ANDROID_HOME}/cmdline-tools/latest/bin/sdkmanager "platforms;android-34" "build-tools;34.0.0" >/dev/null 2>&1 || true
       - run: cd android && gradle :app:assembleDebug --no-daemon --stacktrace
